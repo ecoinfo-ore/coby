@@ -5,7 +5,7 @@
 
 -  Make sure using the option "--recursive" when cloning the project, this allows include the submodules
 
-   `  git clone --recursive https://github.com/rac021/coby.git . `
+   `  git clone --recursive https://github.com/ecoinfo-ore/coby.git . `
   
   [![Watch the video](https://user-images.githubusercontent.com/7684497/36728847-7668397a-1bc2-11e8-9050-27858bb3b343.png)](https://www.youtube.com/embed/ruZTuK-ui2s)
 
