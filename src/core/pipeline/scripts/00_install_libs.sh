@@ -63,13 +63,13 @@
  sleep 0
  tput setaf 7
 
- GITHUB_YEDGEN_PROJECT="https://github.com/rac021/yedGen.git"
+ GITHUB_YEDGEN_PROJECT="https://github.com/ecoinfo-ore/yedGen.git"
 
- GITHUB_ONTOP_PROJECT="https://github.com/rac021/ontop-matarializer.git"
+ GITHUB_ONTOP_PROJECT="https://github.com/ecoinfo-ore/ontop-matarializer.git"
 
- GITHUB_CORESE_PROJECT="https://github.com/rac021/CoreseInfer.git"
+ GITHUB_CORESE_PROJECT="https://github.com/ecoinfo-ore/CoreseInfer.git"
 
- GITHUB_BLZ_PROJECT="https://raw.githubusercontent.com/rac021/blazegraph_libs/master/blazegraph_2_1_4.jar"
+ GITHUB_BLZ_PROJECT="https://raw.githubusercontent.com/ecoinfo-ore/blazegraph_libs/master/blazegraph_2_1_4.jar"
 
  TMP="tmp_install"
  DOCS="Docs"
