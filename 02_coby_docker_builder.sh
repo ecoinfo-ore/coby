@@ -54,7 +54,7 @@
  # blazeGraph Project 
  JAVA_PROJECT_BLAZEGRAPH_PATH="$COBY_LIBS/Blazegraph"
  BLAZEGRAPH_FINAL_BINARY_NAME="blazegraph_2_1_4.jar"
- BLAZEGRAPH_URL="https://raw.githubusercontent.com/rac021/blazegraph_libs/master/blazegraph_2_1_4.jar"
+ BLAZEGRAPH_URL="https://raw.githubusercontent.com/ecoinfo-ore/blazegraph_libs/master/blazegraph_2_1_4.jar"
 
  # jax-Y Web service
 
