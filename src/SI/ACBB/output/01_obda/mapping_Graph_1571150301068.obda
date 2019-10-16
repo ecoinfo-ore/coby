@@ -1,0 +1,73 @@
+[PrefixDeclaration]
+rdf:		http://www.w3.org/1999/02/22-rdf-syntax-ns#
+oboe-core:		http://ecoinformatics.org/oboe/oboe.1.0/oboe-core.owl#
+xsd:		http://www.w3.org/2001/XMLSchema#
+oboe-temporal:		http://ecoinformatics.org/oboe/oboe.1.0/oboe-temporal.owl#
+:		http://www.anaee-france.fr/ontology/anaee-france_ontology#
+oboe-characteristics:		http://ecoinformatics.org/oboe/oboe.1.0/oboe-characteristics.owl#
+oboe-spatial:		http://ecoinformatics.org/oboe/oboe.1.0/oboe-spatial.owl#
+oboe-standards:		http://ecoinformatics.org/oboe/oboe.1.0/oboe-standards.owl#
+rdfs:		http://www.w3.org/2000/01/rdf-schema#
+
+[SourceDeclaration]
+sourceUri	dbAcbbMapping
+connectionUrl	jdbc:postgresql://127.0.0.1/acbb?sendBufferSize=5000
+username	ryahiaoui
+password	yahiaoui
+driverClass	org.postgresql.Driver
+
+[MappingDeclaration] @collection [[
+
+mappingId	(61)_acbb_measurement_experimentalPlot_localName_plot_absolute_id
+target		:acbb/measurement/experimentalPlot/localName/{plot_absolute_id} a oboe-core:Measurement ; oboe-core:ofCharacteristic oboe-core:Name ; oboe-core:hasValue <{plot_code}^^xsd:string> . 
+source		SELECT DISTINCT par.sit_id::varchar || '_' || COALESCE(REPLACE(bloc_id_fullname, '>','-'),'NA') || '_' || par.par_id::varchar || '_' || COALESCE(spa.tra_id::varchar,'NA') AS plot_absolute_id, par.code AS plot_code FROM parcelle_par AS par LEFT JOIN suivi_parcelle_spa AS spa ON par.par_id = spa.par_id LEFT JOIN ( 	 WITH RECURSIVE bloctree AS 	 (SELECT bloc_id, code, nom, parent_id, CAST(bloc_id As varchar(1000)) AS bloc_id_fullname 	 FROM bloc_bloc WHERE parent_id IS NULL 	 UNION ALL 	 SELECT bc.bloc_id,bc.code,bc.nom, bc.parent_id, 	 CAST(bct.bloc_id_fullname || '_of_' || bc.bloc_id As varchar(1000)) AS bloc_id_fullname 	 FROM bloc_bloc AS bc 	 INNER JOIN bloctree AS bct ON (bc.parent_id = bct.bloc_id) ) 	 SELECT bloc_id, bloc_id_fullname FROM bloctree 	 ) AS bloc ON par.bloc_id = bloc.bloc_id ORDER BY plot_absolute_id
+
+mappingId	(72)_acbb_measurement_experimentalNetwork_standardName_soereAcbb
+target		:acbb/measurement/experimentalNetwork/standardName/soereAcbb a oboe-core:Measurement ; oboe-core:ofCharacteristic oboe-core:Name ; oboe-core:usesStandard :Anaee-franceExperimentalNetworkNamingStandard ; oboe-core:hasValue <http://www.anaee-france.fr/ontology/anaee-france_ontology#SoereAcbb> . 
+source		SELECT id from (values ('1')) s(id) ;
+
+mappingId	(71)_acbb_observation_experimentalNetwork
+target		:acbb/observation/experimentalNetwork a oboe-core:Observation ; oboe-core:ofEntity :ExperimentalNetwork ; oboe-core:hasMeasurement :acbb/measurement/experimentalNetwork/standardName/soereAcbb . 
+source		SELECT id from (values ('1')) s(id) ;
+
+mappingId	(70)_acbb_observation_agroEcoSytem_agr_id
+target		:acbb/observation/agroEcoSytem/{agr_id} a oboe-core:Observation ; oboe-core:ofEntity <{agroecosystem_uri}^^xsd:string> . 
+source		SELECT agr.agr_id AS agr_id, CASE agr.code WHEN 'grandes_cultures_et_cultures_dediees_a_la_production_de_biomasse' THEN '#FieldCropsAndCropsDedicatedToBiomassProduction' WHEN 'prairies_permanentes' THEN '#PermanentGrassland' WHEN 'rotation_prairie_culture' THEN '#GrasslandCroppingRotation' ELSE '#unknown_uri' END AS agroecosystem_uri FROM public.agroecosysteme_agr agr
+
+mappingId	(62)_acbb_measurement_experimentalPlot_type_plot_absolute_id
+target		:acbb/measurement/experimentalPlot/type/{plot_absolute_id} a oboe-core:Measurement ; oboe-core:ofCharacteristic oboe-core:PlotType ; oboe-core:hasValue <{plot_type}^^xsd:string> . 
+source		SELECT DISTINCT par.sit_id::varchar || '_' || COALESCE(bloc_id_fullname,'NA') || '_' || par.par_id::varchar || '_' || COALESCE(spa.tra_id::varchar,'NA') AS plot_absolute_id, 	 'plot' AS plot_type FROM parcelle_par AS par LEFT JOIN suivi_parcelle_spa AS spa ON par.par_id = spa.par_id LEFT JOIN (	 		WITH RECURSIVE bloctree AS 		(SELECT bloc_id, code, nom, parent_id, CAST(bloc_id As varchar(1000)) AS bloc_id_fullname 		FROM bloc_bloc 		WHERE parent_id IS NULL 		UNION ALL 		SELECT bc.bloc_id,bc.code,bc.nom, 			bc.parent_id, 			CAST(bct.bloc_id_fullname || '_of_' || bc.bloc_id As varchar(1000)) AS bloc_id_fullname 		FROM bloc_bloc AS bc 			INNER JOIN bloctree AS bct 			ON (bc.parent_id = bct.bloc_id) 		) 		SELECT bloc_id, REPLACE(bloc_id_fullname, '/','-') AS bloc_id_fullname 		FROM bloctree 		) AS bloc 	ON par.bloc_id = bloc.bloc_id 		 ORDER BY plot_absolute_id
+
+mappingId	(65)_acbb_observation_experimentalBloc_bloc_absolute_id
+target		:acbb/observation/experimentalBloc/{bloc_absolute_id} a oboe-core:Observation ; oboe-core:hasContext :acbb/observation/experimentalSite/{site_id} , :acbb/observation/experimentalBloc/{parent_absolute_id} ; oboe-core:ofEntity :ExperimentalBloc ; oboe-core:hasMeasurement :acbb/measurement/experimentalBloc/localName/{bloc_absolute_id} . 
+source		SELECT site_id, bloc_absolute_id, parent_absolute_id FROM ( WITH RECURSIVE bloctree AS 	(SELECT id, bloc_id, code, nom, parent_id, bloc_id::varchar AS bloc_id_fullname, COALESCE(parent_id::varchar,'') AS parent_id_fullname 	FROM bloc_bloc 	WHERE parent_id IS NULL 	UNION ALL 	SELECT bc.id, bc.bloc_id,bc.code,bc.nom, 		bc.parent_id, 		bct.bloc_id_fullname || '_of_' || bc.bloc_id::varchar AS bloc_id_fullname, 		CASE bct.parent_id_fullname 			WHEN '' THEN bc.parent_id::varchar 			ELSE bct.parent_id_fullname || '_of_' || bc.parent_id::varchar 		END 	FROM bloc_bloc AS bc 		INNER JOIN bloctree AS bct 		ON (bc.parent_id = bct.bloc_id) 	) 	SELECT 	CASE WHEN parent_id IS NULL THEN id ELSE id END AS site_id, 	id::varchar || '_' || bloc_id_fullname AS bloc_absolute_id, 	CASE parent_id_fullname 		WHEN '' THEN NULL 		ELSE id::varchar || '_' || parent_id_fullname 	END AS parent_absolute_id 	FROM bloctree ) AS test order by bloc_absolute_id
+
+mappingId	(63)_acbb_observation_treatment_treatment_id
+target		:acbb/observation/treatment/{treatment_id} a oboe-core:Observation ; oboe-core:ofEntity :Treatment ; oboe-core:hasMeasurement :acbb/measurement/treatment/name/{treatment_id} . 
+source		SELECT tra_id AS treatment_id FROM traitement_tra
+
+mappingId	(68)_acbb_measurement_experimentalSite_localName_site_id
+target		:acbb/measurement/experimentalSite/localName/{site_id} a oboe-core:Measurement ; oboe-core:usesStandard :NamingStandard ; oboe-core:ofCharacteristic oboe-core:Name ; oboe-core:hasValue <{site_name}^^xsd:string> . 
+source		SELECT sit.id AS site_id, sit.nom AS site_name FROM site_acbb_sit sit
+
+mappingId	(64)_acbb_measurement_treatment_name_treatment_id
+target		:acbb/measurement/treatment/name/{treatment_id} a oboe-core:Measurement ; oboe-core:ofCharacteristic oboe-core:Name ; oboe-core:usesStandard :Anaee-franceExperimentalTreatmentNamingStandard ; oboe-core:hasValue <{treatment_uri}^^xsd:string> . 
+source		SELECT tra.tra_id AS treatment_id , '#' || sit.code || '_' || tra.nom AS treatment_uri FROM traitement_tra AS tra INNER JOIN site_acbb_sit AS sit ON tra.sit_id = sit.id
+
+mappingId	(66)_acbb_measurement_experimentalBloc_localName_bloc_absolute_id
+target		:acbb/measurement/experimentalBloc/localName/{bloc_absolute_id} a oboe-core:Measurement ; oboe-core:ofCharacteristic oboe-core:Name ; oboe-core:hasValue <{bloc_code}^^xsd:string> . 
+source		SELECT bloc_absolute_id, bloc_code FROM ( WITH RECURSIVE bloctree AS 	(SELECT id, bloc_id, code, nom, parent_id, bloc_id::varchar AS bloc_id_fullname 	FROM bloc_bloc 	WHERE parent_id IS NULL 	UNION ALL 	SELECT bc.id, bc.bloc_id,bc.code,bc.nom, 		bc.parent_id, 		bct.bloc_id_fullname || '_of_' || bc.bloc_id::varchar AS bloc_id_fullname 	FROM bloc_bloc AS bc 		INNER JOIN bloctree AS bct 		ON (bc.parent_id = bct.bloc_id) 	) 	SELECT id::varchar || '_' || bloc_id_fullname AS bloc_absolute_id, REPLACE(code, '/','-') AS bloc_code 	FROM bloctree ) AS temp ORDER BY bloc_absolute_id
+
+mappingId	(69)_acbb_measurement_experimentalSite_standardName_site_id
+target		:acbb/measurement/experimentalSite/standardName/{site_id} a oboe-core:Measurement ; oboe-core:usesStandard :Anaee-franceExperimentalSiteNamingStandard ; oboe-core:ofCharacteristic oboe-core:Name ; oboe-core:hasValue <{site_uri}^^xsd:string> . 
+source		SELECT sit.id AS site_id, CASE sit.code WHEN 'estrees-mons' THEN '#Estrees-Mons' WHEN 'laqueuille' THEN '#Laqueuille' WHEN 'lusignan' THEN '#Lusignan' WHEN 'theix' THEN '#Theix' ELSE '#unknown_uri' END AS site_uri FROM site_acbb_sit sit
+
+mappingId	(67)_acbb_observation_experimentalSite_site_id
+target		:acbb/observation/experimentalSite/{site_id} a oboe-core:Observation ; oboe-core:hasContext :acbb/observation/agroEcoSytem/{agr_id} , :acbb/observation/experimentalNetwork ; oboe-core:ofEntity :ExperimentalSite ; oboe-core:hasMeasurement :acbb/measurement/experimentalSite/standardName/{site_id} , :acbb/measurement/experimentalSite/localName/{site_id} . 
+source		SELECT sit.id AS site_id, sit.agr_id AS agr_id FROM site_acbb_sit sit
+
+mappingId	(60)_acbb_observation_experimentalPlot_plot_absolute_id
+target		:acbb/observation/experimentalPlot/{plot_absolute_id} a oboe-core:Observation ; oboe-core:hasContext :acbb/observation/experimentalSite/{site_id} , :acbb/observation/treatment/{treatment_id} , :acbb/observation/experimentalBloc/{bloc_absolute_id} ; oboe-core:ofEntity :ExperimentalPlot ; oboe-core:hasMeasurement :acbb/measurement/experimentalPlot/type/{plot_absolute_id} , :acbb/measurement/experimentalPlot/localName/{plot_absolute_id} . 
+source		SELECT DISTINCT par.sit_id::varchar || '_' || COALESCE(REPLACE(bloc_id_fullname, '/','-'),'NA') || '_' || par.par_id::varchar || '_' || COALESCE(spa.tra_id::varchar,'NA') AS plot_absolute_id, 	CASE WHEN bloc_id_fullname IS NULL THEN par.sit_id ELSE NULL END AS site_id, 	spa.tra_id AS treatment_id, 	CASE WHEN bloc_id_fullname IS NULL THEN NULL ELSE par.sit_id::varchar || '_' || bloc_id_fullname END AS bloc_absolute_id FROM parcelle_par AS par LEFT JOIN suivi_parcelle_spa AS spa ON par.par_id = spa.par_id LEFT JOIN (	 		WITH RECURSIVE bloctree AS 		(SELECT bloc_id, code, nom, parent_id, bloc_id::varchar AS bloc_id_fullname 		FROM bloc_bloc 		WHERE parent_id IS NULL 		UNION ALL 		SELECT bc.bloc_id,bc.code,bc.nom, 			bc.parent_id, 			CAST(bct.bloc_id_fullname || '_of_' || bc.bloc_id As varchar(1000)) AS bloc_id_fullname 		FROM bloc_bloc AS bc 			INNER JOIN bloctree AS bct 			ON (bc.parent_id = bct.bloc_id) 		) 		SELECT bloc_id, REPLACE(bloc_id_fullname, '/','-') AS bloc_id_fullname 		FROM bloctree 		) AS bloc 	ON par.bloc_id = bloc.bloc_id 		 ORDER BY plot_absolute_id
+
+]]

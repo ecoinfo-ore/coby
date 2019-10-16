@@ -1,0 +1,32 @@
+Standard AnaEE;Categorie(s) AnaEE;Contexte(s);prefix Entité si autre que anaee-france;Entité;prefix Caractéristique si autre que anaee-france;Caractéristique;Protocol;Qualificatifs (flexible);prefix Unité si autre que anaee-france;nom de l'unité (display name);nom varaiable (fr) dans bd;nom (fr) type de donnée dans la bd
+:AirCarbonDioxideMolarFraction;:Meteorology , :CarbonCycle;:Atmosphere , :Air;;:CarbonDioxyde;;:MolarFraction;;:Half-HourlyAverage;;:MicromolePerMole;CO2;Flux tours
+:AirWaterVapourMolarFraction;:Meteorology , :WaterCycle;:Atmosphere , :Air;;:Water;;:MolarFraction;;:Half-HourlyAverage;;:MillimolePerMole;H2O;Flux tours
+:AtmosphericAirStabilityParameter;:Meteorology , :SurfaceEnergyBalance;:Atmosphere;;:Air;;:StabilityParameter;;:Half-HourlyAverage;;:Unitless;ZL;Flux tours
+:NetCarbonDioxideFluxDensityAboveTheEcosystem;:SurfaceFlux , :CarbonCycle;:TopOfEcosystem;;:CarbonDioxyde;;:MassFluxDensity;;:Half-HourlyAverage;;:MicromolePerMeterSquaredPerSecond;Fc;Flux tours
+:NetCarbonDioxideFluxDensityAboveTheEcosystem;:SurfaceFlux , :CarbonCycle;:TopOfEcosystem;;:CarbonDioxyde;;:MolarFluxDensity;:Gapfilled;:Half-HourlyAverage;;:MicromolePerMeterSquaredPerSecond;Fc gf;Flux tours
+:SensibleHeatEnergyFluxDensity;:SurfaceFlux , :SurfaceEnergyBalance;:TopOfEcosystem;;:SensibleHeat;;:EnergyFluxDensity;;:Half-HourlyAverage;;oboe-standards:WattPerMeterSquared;H;Flux tours
+:LatentHeatEnergyFluxDensity;:SurfaceFlux , :SurfaceEnergyBalance;:TopOfEcosystem;;:LatentHeat;;:EnergyFluxDensity;;:Half-HourlyAverage;;oboe-standards:WattPerMeterSquared;LE;Flux tours
+:AirMomentumFluxDensity;:SurfaceFlux , :AtmosphericConvection;:Atmosphere , :Air;;:Momentum;;:MomentumFluxDensity;;:Half-HourlyAverage;;:KilogramPerMeterPerSecondSquared;t;Flux tours
+:WindFrictionVelocity;:Meteorology , :AtmosphericConvection;:Atmosphere , :Air;;:Wind;;:FrictionVelocity;;:Half-HourlyAverage;oboe-standards;oboe-standards:MeterPerSecond;u*;Flux tours
+:StandTranspirationFlux;:SurfaceFlux , :WaterCycle;:Stand;;:Transpiration;;:VolumetricFlux;;:Half-HourlyCumulative;;:MilliliterPerMeterSquared;TR;Flux tours
+:BiomassCanopyHeatStorageFluxDensity;:SurfaceFlux , :SurfaceEnergyBalance;:VegetationCover , :Biomass;;:HeatStorage;;:EnergyFluxDensity;;:Half-HourlyAverage;;oboe-standards:WattPerMeterSquared;Sb;Flux tours
+:AirVegetationCarbonDioxideStorageFluxDensity;:SurfaceFlux , :CarbonCycle;:VegetationCover , :Air;;:CarbonDioxydeStorage;;:MassFluxDensity;;:Half-HourlyAverage;;:MicromolePerMeterSquaredPerSecond;Sc;Flux tours
+:AirVegetationLatentHeatStorageFluxDensity;:SurfaceFlux , :SurfaceEnergyBalance;:VegetationCover , :Air;;:LatentHeatStorage;;:EnergyFluxDensity;;:Half-HourlyAverage;;oboe-standards:WattPerMeterSquared;Sw;Flux tours
+:AirVegetationSensibleHeatStorageFluxDensity;:SurfaceFlux , :SurfaceEnergyBalance;:VegetationCover , :Air;;:SensibleHeatStorage;;:EnergyFluxDensity;;:Half-HourlyAverage;;oboe-standards:WattPerMeterSquared;Sa;Flux tours
+:ReflectedShortwaveRadiationFluxDensity;:SurfaceFlux , :SurfaceEnergyBalance;:Atmosphere , oboe-spatial:Surface;;:ReflectedShortwaveRadiation;;:EnergyFluxDensity;;:Half-HourlyAverage;;oboe-standards:WattPerMeterSquared;Rr;Météorologie semi-horaire
+:UpwardLongwaveRadiationFluxDensity;:SurfaceFlux , :SurfaceEnergyBalance;:Atmosphere , oboe-spatial:Surface;;:UpwardLongwaveRadiation;;:EnergyFluxDensity;;:Half-HourlyAverage;;oboe-standards:WattPerMeterSquared;LWout;Météorologie semi-horaire
+:NetRadiationFluxDensity;:SurfaceFlux , :SurfaceEnergyBalance;oboe-spatial:Surface;;:NetRadiation;;:EnergyFluxDensity;;:Half-HourlyAverage;;oboe-standards:WattPerMeterSquared;Rn;Météorologie semi-horaire
+:DiffuseIncidentShortwaveRadiationFluxDensity;:Meteorology , :SurfaceEnergyBalance;:Atmosphere;;:DiffuseIncidentShortwaveRadiation;;:EnergyFluxDensity;;:Half-HourlyAverage;;oboe-standards:WattPerMeterSquared;Rd;Météorologie semi-horaire
+:IncidentPhotosyntheticallyActiveRadiationMolarFluxDensity;:Meteorology , :Photosynthesis;:Atmosphere;;:IncidentPhotosyntheticallyActiveRadiation;;:MolarFluxDensity;;:Half-HourlyAverage;;:MicromolePerMeterSquaredPerSecond;PAR;Météorologie semi-horaire
+:DiffuseIncidentPhotosyntheticallyActiveRadiationFluxDensity;:Meteorology , :Photosynthesis;:Atmosphere;;:DiffuseIncidentPhotosyntheticallyActiveRadiation;;:MolarFluxDensity;;:Half-HourlyAverage;;:MicromolePerMeterSquaredPerSecond;PPFDd;Météorologie semi-horaire
+:ReflectedPhotosyntheticallyActiveRadiationFluxDensity;:SurfaceFlux , :Photosynthesis;:Atmosphere;;:ReflectedPhotosyntheticallyActiveRadiation;;:MolarFluxDensity;;:Half-HourlyAverage;;:MicromolePerMeterSquaredPerSecond;PARr;Météorologie semi-horaire
+:CumulativeRainfall;:Meteorology , :WaterCycle;;;:CumulativeRain;;:VolumePerSurface;;:Half-HourlyCumulative;oboe-standards;oboe-standards:Millimeter;P;Météorologie semi-horaire
+:IncidentShortwaveRadiationFluxDensity;:Meteorology , :SurfaceEnergyBalance;:Atmosphere;;:IncidentShortwaveRadiation;;:EnergyFluxDensity;;:Half-HourlyAverage;;oboe-standards:WattPerMeterSquared;Rg;Météorologie semi-horaire
+:IncidentLongwaveRadiationFluxDensity;:Meteorology , :SurfaceEnergyBalance;:Atmosphere;;:IncidentLongwaveRadiation;;:EnergyFluxDensity;;:Half-HourlyAverage;;oboe-standards:WattPerMeterSquared;LWin;Météorologie semi-horaire
+:AirTemperature;:Meteorology;:Atmosphere;;:Air;oboe-characteristics;oboe-characteristics:Temperature;;:Half-HourlyAverage;;oboe-standards:Celsius;Ta;Météorologie semi-horaire
+:AirRelativeHumidity;:Meteorology , :WaterCycle;:Atmosphere , :Air;;:WaterVapour;;:RelativeHumidity;;:Half-HourlyAverage;;oboe-standards:Percent;Rh;Météorologie semi-horaire
+:AirPressure;:Meteorology;:Atmosphere;;:Air;oboe-characteristics;oboe-characteristics:Pressure;;:Half-HourlyAverage;oboe-standards;oboe-standards:Kilopascal;Pa;Météorologie semi-horaire
+:WindDirection;:Meteorology , :AtmosphericConvection;:Atmosphere;;:Wind;;:Direction;;:Half-HourlyAverage;oboe-standards;oboe-standards:Degree;WD;Météorologie semi-horaire
+:HorizontalWindSpeed;:Meteorology , :AtmosphericConvection;:Atmosphere;;:Wind;;:HorizontalSpeed;;:Half-HourlyAverage;oboe-standards;oboe-standards:MeterPerSecond;WS;Météorologie semi-horaire
+:SoilAlbedo;:SurfaceFlux , :SurfaceEnergyBalance;:Soil;;:SoilSurface;;:Albedo;;:Half-HourlyAverage;;:Ratio0-1;albedo;Météorologie semi-horaire
+:soilTemperature;:SoilPhysic , :HeatFlow;:Soil;;:SoilLevel;;oboe-characteristics:Temperature;;:Half-HourlyAverage;oboe-standards;oboe-standards:Kelvin;Tg;Météorologie semi-horaire

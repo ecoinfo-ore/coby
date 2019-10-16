@@ -37,7 +37,7 @@
  SCRIPTS_PATH_DESTINATION="$COBY_BINARY/scripts"
 
  PIPELINE_JAVA_PROJECT_PATH="$COBY_CORE/pipeline/java_projects"
- JAXY_JAVA_PROJECT_PATH="$COBY_CORE/jax-Y-ws"
+ JAXY_JAVA_PROJECT_PATH="$COBY_CORE/jaxy-ws"
 
  # Coby Project
  JAVA_PROJECT_CORESE_PATH="$PIPELINE_JAVA_PROJECT_PATH/CoreseInfer"
@@ -59,17 +59,17 @@
  # jax-Y Web service
 
  # Dependencies 
- JAVA_PROJECT_JAXY_API="$JAXY_JAVA_PROJECT_PATH/dep/01_G-Jax-Swar-Api"
- JAVA_PROJECT_JAXY_SECURITY="$JAXY_JAVA_PROJECT_PATH/dep/02_G-Jax-Security-Provider"
- JAVA_PROJECT_JAXY_DISCOVERY="$JAXY_JAVA_PROJECT_PATH/dep/03_G-Jax-Service-Discovery"
+ JAVA_PROJECT_JAXY_API="$JAXY_JAVA_PROJECT_PATH/dependencies/01_jaxy-api"
+ JAVA_PROJECT_JAXY_SECURITY="$JAXY_JAVA_PROJECT_PATH/dependencies/02_jaxy-security-provider"
+ JAVA_PROJECT_JAXY_DISCOVERY="$JAXY_JAVA_PROJECT_PATH/dependencies/03_jaxy-service-discovery"
  # Impl
- JAVA_PROJECT_JAXY_COBY="$JAXY_JAVA_PROJECT_PATH/Jax-Y-Coby"
- JAVA_PROJECT_JAXY_CLIENT="$JAXY_JAVA_PROJECT_PATH/Jax-Y-Client"
+ JAVA_PROJECT_JAXY_COBY="$JAXY_JAVA_PROJECT_PATH/jaxy"
+ JAVA_PROJECT_JAXY_CLIENT="$JAXY_JAVA_PROJECT_PATH/add-on/JaxyClientUi"
  
- JAXY_SERVER_PATH="$COBY_BINARY_ROOT/jax-y_server"
- JAXY_SERVER_NAME="jax-y-swarm.jar"
- JAXY_CLIENT_PATH="$COBY_BINARY_ROOT/jax-y_client"
- JAXY_CLIENT_NAME="g-jax-client.jar"
+ JAXY_SERVER_PATH="$COBY_BINARY_ROOT/jaxy-server"
+ JAXY_SERVER_NAME="jaxy-coby-thorntail.jar"
+ JAXY_CLIENT_PATH="$COBY_BINARY_ROOT/jaxy-client"
+ JAXY_CLIENT_NAME="jaxy-client.jar"
 
  rm    -rf $COBY_BINARY_ROOT
  mkdir -p  $COBY_BINARY  
@@ -209,7 +209,7 @@
  tput setaf 2
  echo 
  echo " ###########################                         "
- echo " ##### Install jax-Y-API ###                         "
+ echo " ##### Install jaxy-API ###                         "
  echo 
  echo -e "\e[90m Location :  $TMP_COMPILATION_FOLDER \e[32m "
  echo
@@ -224,12 +224,12 @@
 
  tput setaf 2
  echo 
- echo " ###########################                         "
- echo " ##### Install jax-Y-Sec ###                         "
+ echo " ################################                    "
+ echo " ##### Install Jaxy-Security ###                     "
  echo 
  echo -e "\e[90m Location :  $TMP_COMPILATION_FOLDER \e[32m "
  echo
- echo " ###########################                         "
+ echo " ###############################                     "
  echo 
  sleep 2
  tput setaf 7
@@ -240,12 +240,12 @@
 
  tput setaf 2
  echo 
- echo " ############################                         "
- echo " ##### Install jax-Y-Disc ###                         "
+ echo " ########################################             "
+ echo " ##### Install Jaxy Service Discovery ###             "
  echo 
  echo -e "\e[90m Location :  $TMP_COMPILATION_FOLDER \e[32m  "
  echo
- echo " ############################                         "
+ echo " ########################################             "
  echo 
  sleep 2
  tput setaf 7
