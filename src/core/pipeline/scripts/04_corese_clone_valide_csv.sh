@@ -31,7 +31,7 @@
   if [ ! -f $SELECTED_SI ]  ; then
      echo
      echo -e "\e[91m Missing $SELECTED_SI ! \e[39m "
-     echo -e "\e[91m You can use the command [[ ./scripts/01_use_si.sh si=WhichSI ]] to set the var WhichSI ! \e[39m "    
+     echo -e "\e[91m You can use the command [[ ./scripts/01_use_si.sh si=WhichSI ]] to set the var WhichSI ! \e[39m " 
      EXIT
   fi
  
@@ -49,7 +49,7 @@
                KEY=${1%%=*}
                VALUE=${1#*=}		
                case "$KEY" in
-                    ("owl")              OWL=$VALUE                    
+                    ("owl")              OWL=$VALUE
                     ;;
                     ("csv")              CSV=$VALUE
                     ;;                     
@@ -61,7 +61,7 @@
                     ;;
                     ("intra_separators") INTRA_SEP=$VALUE
                     ;; 
-                    ("columns")          COLUMNS=$VALUE
+                    ("columns")          COLUMNSZ=$VALUE
                     ;;
                     ("query_file")       QUERY_FILE=$VALUE
                     ;;
@@ -101,7 +101,7 @@
   PREFIX=${PREFIX:-"$PARENT_SI/ontology/prefix.txt"}
   CSV_SEP=${CSV_SEP:-";"}  
   INTRA_SEP=${INTRA_SEP:-" -intra_sep , "}
-  COLUMNS=${COLUMNS:-" -column 0 "}
+  COLUMNSZ=${COLUMNSZ:-" -column 0 "}
   
   XMS=${XMS:-"$DEFAULT_XMS"}
   XMX=${XMX:-"$DEFAULT_XMX"}
@@ -121,12 +121,12 @@
   echo -e " --------------------------------------------------------- "
   echo -e "\e[90m$0        \e[32m                                     "
   echo
-  echo -e " ##  OWL                 : $OWL                            "  
+  echo -e " ##  OWL                 : $OWL                            "
   echo -e " ##  PREFIX File         : $PREFIX                         "
   echo -e " ##  CSV to validate     : $CSV                            "
-  echo -e " ##  COLUMNS to validate : $COLUMNS                        "
+  echo -e " ##  COLUMNS to validate : $COLUMNSZ                       "
   echo -e " ##  CSV_SEP             : $CSV_SEP                        "
-  echo -e " ##  INTRA_SEPS          : $INTRA_SEP                      "  
+  echo -e " ##  INTRA_SEPS          : $INTRA_SEP                      "
   echo -e " ##  OUTPUT Valide CSV   : $OUT                            "
   echo -e " ##  ENABLE_FULL_URI     : $ENABLE_FULL_URI                "
   echo -e " ##  ENABLE_URI_BRACKETS : $ENABLE_URI_BRACKETS            "
@@ -162,7 +162,7 @@
         -prefix     "$PREFIX"                                       \
         -csv_sep    "$CSV_SEP"                                      \
         $INTRA_SEP                                                  \
-        $COLUMNS                                                    \
+        $COLUMNSZ                                                   \
         $QUERY_FILE                                                 \
         $ENABLE_FULL_URI                                            \
         $ENABLE_URI_BRACKETS 
