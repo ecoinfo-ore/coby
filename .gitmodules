@@ -2,11 +2,18 @@
 	path = src/core/pipeline/java_projects/yedGen
 	url = https://github.com/ecoinfo-ore/yedGen.git
 	branch = master
+	master = master
 [submodule "src/core/pipeline/java_projects/CoreseInfer"]
 	path = src/core/pipeline/java_projects/CoreseInfer
 	url = https://github.com/ecoinfo-ore/CoreseInfer.git
 	branch = master
+	master = master
 [submodule "src/core/pipeline/java_projects/ontop-matarializer"]
 	path = src/core/pipeline/java_projects/ontop-matarializer
 	url = https://github.com/ecoinfo-ore/ontop-matarializer.git
 	branch = master
+	master = master
+[submodule "submodule.src/core/pipeline/java_projects/yedGen.path"]
+	master = master
+[submodule "submodule.src/core/pipeline/java_projects/yedGen"]
+	master = master
