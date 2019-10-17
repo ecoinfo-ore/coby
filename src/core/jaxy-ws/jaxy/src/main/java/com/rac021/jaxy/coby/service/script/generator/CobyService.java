@@ -38,7 +38,7 @@ public class CobyService    {
     }
     
     @GET
-    @Produces( {  "xml/plain" } )
+    @Produces( { "xml/plain" , "json/plain" , "json/encrypted" , "xml/encrypted" } )
     public Response gen ( @HeaderParam("keep") String filterdIndex , 
                           @Context UriInfo uriInfo ) throws UnsupportedEncodingException {    
         
