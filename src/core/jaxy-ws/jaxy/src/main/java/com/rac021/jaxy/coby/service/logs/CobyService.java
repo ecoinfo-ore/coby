@@ -43,7 +43,7 @@ public class CobyService    {
     }
    
     @GET
-    @Produces( {  "xml/plain" } )
+    @Produces( { "xml/plain" , "json/plain" , "json/encrypted" , "xml/encrypted" } )
     public Response getResource ( @HeaderParam("API-key-Token") String token ,
                                   @HeaderParam("keep") String filterdIndex   , 
                                   @Context UriInfo uriInfo                 ) throws Exception {
