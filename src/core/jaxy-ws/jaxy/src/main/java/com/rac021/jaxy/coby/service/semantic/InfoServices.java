@@ -65,7 +65,7 @@ public class InfoServices {
     }
    
     @GET
-    @Produces( {"json/plain", "xml/plain" , "json/plain", "json/encrypted"} )
+    @Produces( {"json/plain", "xml/plain" , "xml/encrypted", "json/encrypted"} )
     
     public Response getResourceJson() throws Exception {    
         return produceInfoServices() ;
