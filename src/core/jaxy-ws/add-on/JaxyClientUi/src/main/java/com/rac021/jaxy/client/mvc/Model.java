@@ -266,9 +266,7 @@ public class Model {
         
         final CountDownLatch latch = new CountDownLatch(1) ;
 
-        out.disableSelection()                             ;
-        
-        initHttpClient()                                   ;
+	initHttpClient()                                   ;
 
         consumer = new AsyncCharConsumer<HttpResponse>(BUF_SIZE) {
 
