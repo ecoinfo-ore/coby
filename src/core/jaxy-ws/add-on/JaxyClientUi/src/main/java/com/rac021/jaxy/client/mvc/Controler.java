@@ -12,6 +12,8 @@ import java.io.UnsupportedEncodingException ;
 import java.security.NoSuchAlgorithmException ;
 import com.rac021.jaxy.client.security.Digestor ;
 import com.rac021.jaxy.client.security.JceSecurity ;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 /**
  *
@@ -44,6 +46,11 @@ public class Controler       {
         button_Run_SSO_ActionPerformed()        ;
         button_Run_Custom_ActionPerformed()     ;
         button_ClearResult_ActionPerformed()    ;
+        
+        button_Stop_Service_Custom_ActionPerformed() ;
+        
+        checkBoxKeppAllLines() ;
+        
         button_Gen_Script_SSO_ActionPerformed() ;
         button_Dectypt_ActionPerformed()        ;
         button_Clear_Custom_ActionPerformed()   ;
@@ -165,6 +172,8 @@ public class Controler       {
               try {
 
                    IOutputWraper out = new OutputWraperTextArea(frame.getTextArea_Result_SSO()) ;
+                   
+                   int totalLineToKeep = (int) this.frame.getSpinnerTotalLinesToKeep().getValue() ;
                     
                    frame.getTextArea_Result_SSO()
                         .setText( Model.invokeService_Using_SSO( out         ,
@@ -176,7 +185,8 @@ public class Controler       {
                                                                  client_id   ,
                                                                  secret_id   ,
                                                                  userName    ,
-                                                                 password )  ) ;
+                                                                 password    ,
+                                                                 totalLineToKeep)  ) ;
                   
                } catch ( Exception ex ) {
                    
@@ -310,13 +320,16 @@ public class Controler       {
 
                 IOutputWraper out = new OutputWraperTextArea(frame.getTextArea_Result_Custom() ) ;
             
-                Model.invokeService_Using_Custom( out        ,
-                                                  urlService , 
-                                                  params     ,
-                                                  accept     , 
+                int totalLineToKeep = (int) this.frame.getSpinnerTotalLinesToKeep().getValue() ;
+                
+                Model.invokeService_Using_Custom( out         ,
+                                                  urlService  , 
+                                                  params      ,
+                                                  accept      , 
                                                   login + " " + timeStamp + " " + signe , 
-                                                  keep         ,
-                                                  cipher       ) ;
+                                                  keep        ,
+                                                  cipher      ,
+                                                  totalLineToKeep ) ;
                 
                 frame.getXBusy().setBusy(false)                  ;
                 frame.getProgressBar().setIndeterminate(false)   ;
@@ -338,7 +351,25 @@ public class Controler       {
        new Thread(r).start() ;
        
     }
+    
+    private void button_Stop_Service_Custom_ActionPerformed() {
+    
+        frame.getButton_Stop_Service().addActionListener(e ->   {
+            try {
+                button_Stop_Service_Custom_Actionm(e) ;
+            } catch (Exception ex) {
+                Logger.getLogger(Controler.class.getName()).log(Level.SEVERE, null, ex) ;
+            }
+        }) ;
+    }
 
+    private void button_Stop_Service_Custom_Actionm( ActionEvent e ) 
+                                                    throws NoSuchAlgorithmException, Exception {
+        System.out.println("Stop Service... " ) ;
+        Model.closetHttpClient()                ;
+  
+    }
+    
     private String hashMessage( String message, String hashAlog ) throws NoSuchAlgorithmException   {
         if(hashAlog.equalsIgnoreCase("SHA1")) return Digestor.toString( Digestor.toSHA1(message))   ;
         if(hashAlog.equalsIgnoreCase("SHA2")) return Digestor.toString( Digestor.toSHA256(message)) ;
@@ -452,6 +483,21 @@ public class Controler       {
                 Logger.getLogger(Controler.class.getName()).log(Level.SEVERE, null, ex) ;
             }
         }) ;
+    }
+
+    private void checkBoxKeppAllLines() {
+       frame.getCheckBoxKeepAllLines().addItemListener( (ItemEvent e ) -> {
+           if(e.getStateChange() == ItemEvent.SELECTED) { 
+               this.frame.getCheckBoxKeepAllLines().setText("Keep Only ") ;
+               this.frame.getSpinnerTotalLinesToKeep().setEnabled(true)   ;
+               this.frame.getSpinnerTotalLinesToKeep().setValue(10_000)   ;
+           } else {
+               this.frame.getCheckBoxKeepAllLines().setText("Keep All Lines") ;
+               this.frame.getSpinnerTotalLinesToKeep().setEnabled(false)      ;
+               this.frame.getSpinnerTotalLinesToKeep().setValue(0)            ;
+               
+           };
+       });
     }
     
 }

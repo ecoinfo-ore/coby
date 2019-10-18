@@ -7,6 +7,7 @@ import javax.swing.* ;
 import java.awt.event.* ;
 import javax.swing.border.* ;
 import javax.swing.event.*;
+import com.jgoodies.forms.layout.*;
 import net.miginfocom.swing.* ;
 import com.jgoodies.forms.factories.* ;
 import org.jdesktop.swingx.JXTaskPane ;
@@ -462,15 +463,41 @@ public class MainFrame extends JFrame {
        textArea_Token.setText("") ;
     }
 
-        
+    public JButton getButton_Stop_Service() {
+        return button_Stop_Service_Custom;
+    }
 
+    public void setButton_Stop_Service(JButton button_Stop_Service) {
+        this.button_Stop_Service_Custom = button_Stop_Service;
+    }
+
+    private void button_Stop_Service_ActionPerformed(ActionEvent e) {
+        // TODO add your code here
+    }
+
+    private void checkBoxKeepAllLinesStateChanged(ChangeEvent e) {
+       
+    }
+
+    public JSpinner getSpinnerTotalLinesToKeep() {
+        return spinnerTotalLinesToKeep;
+    }
+
+    public void setSpinnerTotalLinesToKeep(JSpinner spinnerTotalLinesToKeep) {
+        this.spinnerTotalLinesToKeep = spinnerTotalLinesToKeep;
+    }
+    
+    public JCheckBox getCheckBoxKeepAllLines() {
+       return this.checkBoxKeepAllLines       ;
+    }
+    
         //////////////////////////////////////////////////////////////////////////////////
 	////////////////////////////////////////////////////////////////////////////////
 	  
 	
 	private void initComponents() {
 		// JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-                // Generated using JFormDesigner Evaluation license - RAC YAH
+                // Generated using JFormDesigner Evaluation license - rya
                 DefaultComponentFactory compFactory = DefaultComponentFactory.getInstance();
                 menuBar1 = new JMenuBar();
                 menu1 = new JMenu();
@@ -532,6 +559,7 @@ public class MainFrame extends JFrame {
                 panel10 = new JPanel();
                 label34 = new JLabel();
                 textField_Params_Custom = new JTextField();
+                button_Stop_Service_Custom = new JButton();
                 label41 = new JLabel();
                 label42 = new JLabel();
                 label43 = new JLabel();
@@ -551,6 +579,9 @@ public class MainFrame extends JFrame {
                 comboBox_Cipher_Custom = new JComboBox<>();
                 button_Decrypt_Custom = new JXHyperlink();
                 label5 = new JLabel();
+                panel14 = new JPanel();
+                checkBoxKeepAllLines = new JCheckBox();
+                spinnerTotalLinesToKeep = new JSpinner();
                 scrollPane5 = new JScrollPane();
                 textArea_Result_Custom = new JTextArea();
                 button_Script_CUSTOM = new JButton();
@@ -598,7 +629,7 @@ public class MainFrame extends JFrame {
                 label1 = new JLabel();
 
                 //======== this ========
-                setTitle("G-Jax-Client");
+                setTitle("Jaxy-Client");
                 setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
                 setMinimumSize(new Dimension(800, 770));
                 setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -684,6 +715,23 @@ public class MainFrame extends JFrame {
                     menuBar1.add(menuHelp);
                 }
                 setJMenuBar(menuBar1);
+
+                //======== panel35 ========
+                {
+
+                    // JFormDesigner evaluation mark
+                    panel35.setBorder(new javax.swing.border.CompoundBorder(
+                        new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(0, 0, 0, 0),
+                            "JFormDesigner Evaluation", javax.swing.border.TitledBorder.CENTER,
+                            javax.swing.border.TitledBorder.BOTTOM, new java.awt.Font("Dialog", java.awt.Font.BOLD, 12),
+                            java.awt.Color.red), panel35.getBorder())); panel35.addPropertyChangeListener(new java.beans.PropertyChangeListener(){public void propertyChange(java.beans.PropertyChangeEvent e){if("border".equals(e.getPropertyName()))throw new RuntimeException();}});
+
+                    panel35.setLayout(new FormLayout(
+                        "[150dlu,default]",
+                        "default, $lgap, default"));
+                }
+                contentPane.add(panel35, CC.xy(3, 1));
+                contentPane.add(label33, CC.xywh(5, 1, 7, 1));
 
                 //======== scrollPane3 ========
                 {
@@ -867,7 +915,7 @@ public class MainFrame extends JFrame {
                         {
                             PanelSSO3.setLayout(new FormLayout(
                                 "7dlu, 2*($lcgap, default), $lcgap, default:grow, 3*($lcgap, default), $lcgap, right:default:grow, 6dlu, default, 10dlu",
-                                "4dlu, default, $lgap, default, 6dlu, default, 21dlu, default, $lgap, 25dlu, 3*($lgap, default), 15dlu:grow, 10dlu, 6dlu, 10dlu, fill:default, 11dlu"));
+                                "4dlu, 2*(default), 3dlu, default, 21dlu, default, $lgap, 25dlu, 3*($lgap, default), 15dlu:grow, 10dlu, 6dlu, 10dlu, fill:default, 11dlu"));
 
                             //======== PanelConfig4 ========
                             {
@@ -917,7 +965,7 @@ public class MainFrame extends JFrame {
 
                                 //---- textField_RUL_SERVICE_Custom ----
                                 textField_RUL_SERVICE_Custom.setFont(new Font("DejaVu Sans", Font.PLAIN, 15));
-                                textField_RUL_SERVICE_Custom.setText("http://localhost:8080/rest/resources/infoServices");
+                                textField_RUL_SERVICE_Custom.setText("http://localhost:8080/coby/rest/resources/infoServices");
                                 PanelConfig4.add(textField_RUL_SERVICE_Custom, CC.xywh(19, 5, 2, 1));
 
                                 //---- button_Run_Custom ----
@@ -966,6 +1014,11 @@ public class MainFrame extends JFrame {
                                     panel10.add(textField_Params_Custom, "cell 1 0 2 1,growx");
                                 }
                                 PanelConfig4.add(panel10, CC.xy(19, 7));
+
+                                //---- button_Stop_Service_Custom ----
+                                button_Stop_Service_Custom.setText("Stop");
+                                button_Stop_Service_Custom.addActionListener(e -> button_Stop_Service_ActionPerformed(e));
+                                PanelConfig4.add(button_Stop_Service_Custom, CC.xy(22, 7));
 
                                 //---- label41 ----
                                 label41.setText("Hashed Login");
@@ -1067,12 +1120,10 @@ public class MainFrame extends JFrame {
 
                                     //---- comboBox_Accept_Custom ----
                                     comboBox_Accept_Custom.setModel(new DefaultComboBoxModel<>(new String[] {
-                                        "xml/plain"            ,
-                                        "xml/encrypted"        ,
-                                        "json/plain"           ,
-                                        "json/encrypted"       ,
-                                        "application/template" ,
-                                        "text/event-stream"
+                                        "xml/plain",
+                                        "xml/encrypted",
+                                        "json/plain",
+                                        "json/encrypted"
                                     }));
                                     panel12.add(comboBox_Accept_Custom, "cell 1 0");
                                 }
@@ -1120,9 +1171,38 @@ public class MainFrame extends JFrame {
                                 //---- label5 ----
                                 label5.setText(" Decryption key Function for secured services = SHA-256 ( HashedPassword ( ... )  )");
                                 label5.setForeground(new Color(91, 91, 91));
-                                PanelConfig4.add(label5, CC.xywh(1, 15, 12, 1));
+                                PanelConfig4.add(label5, CC.xywh(1, 15, 9, 1, CC.DEFAULT, CC.BOTTOM));
                             }
                             PanelSSO3.add(PanelConfig4, CC.xywh(2, 2, 16, 1));
+
+                            //======== panel14 ========
+                            {
+                                panel14.setMinimumSize(new Dimension(150, 10));
+                                panel14.setLayout(new MigLayout(
+                                    "hidemode 3,alignx left",
+                                    // columns
+                                    "0[shrink 0,fill]" +
+                                    "[20%!,shrink 0,left]",
+                                    // rows
+                                    "0[]"));
+
+                                //---- checkBoxKeepAllLines ----
+                                checkBoxKeepAllLines.setText("Keep Only");
+                                checkBoxKeepAllLines.setMinimumSize(new Dimension(180, 20));
+                                checkBoxKeepAllLines.setMaximumSize(new Dimension(180, 20));
+                                checkBoxKeepAllLines.setForeground(new Color(0, 255, 204));
+                                checkBoxKeepAllLines.setBackground(Color.black);
+                                checkBoxKeepAllLines.setSelected(true);
+                                checkBoxKeepAllLines.addChangeListener(e -> checkBoxKeepAllLinesStateChanged(e));
+                                panel14.add(checkBoxKeepAllLines, "cell 0 0,aligny bottom,grow 100 0");
+
+                                //---- spinnerTotalLinesToKeep ----
+                                spinnerTotalLinesToKeep.setBackground(Color.blue);
+                                spinnerTotalLinesToKeep.setFont(new Font(Font.DIALOG, Font.PLAIN, 14));
+                                spinnerTotalLinesToKeep.setModel(new SpinnerNumberModel(10000, 0, null, 1));
+                                panel14.add(spinnerTotalLinesToKeep, "cell 1 0,aligny bottom,grow 100 0");
+                            }
+                            PanelSSO3.add(panel14, new CellConstraints(2, 3, 7, 1, CC.DEFAULT, CC.BOTTOM, new Insets(8, 0, 0, 0)));
 
                             //======== scrollPane5 ========
                             {
@@ -1137,36 +1217,36 @@ public class MainFrame extends JFrame {
                                 textArea_Result_Custom.setEditable(false);
                                 scrollPane5.setViewportView(textArea_Result_Custom);
                             }
-                            PanelSSO3.add(scrollPane5, CC.xywh(2, 6, 14, 16));
+                            PanelSSO3.add(scrollPane5, CC.xywh(2, 5, 14, 16));
 
                             //---- button_Script_CUSTOM ----
                             button_Script_CUSTOM.setText("Script");
                             button_Script_CUSTOM.addActionListener(e -> button_Script_CUSTOM_ActionPerformed(e));
-                            PanelSSO3.add(button_Script_CUSTOM, CC.xy(17, 6));
+                            PanelSSO3.add(button_Script_CUSTOM, CC.xy(17, 5));
 
                             //---- button_Clear_Custom ----
                             button_Clear_Custom.setText("Clear ");
                             button_Clear_Custom.addActionListener(e -> button_ClearActionPerformed(e));
-                            PanelSSO3.add(button_Clear_Custom, CC.xy(17, 8));
+                            PanelSSO3.add(button_Clear_Custom, CC.xy(17, 7));
 
                             //---- button_Copy_ClipBoard_Custom ----
                             button_Copy_ClipBoard_Custom.setText("Copy_Text");
                             button_Copy_ClipBoard_Custom.setClickedColor(new Color(51, 51, 255));
                             button_Copy_ClipBoard_Custom.setFont(new Font("Tahoma", Font.BOLD, 12));
                             button_Copy_ClipBoard_Custom.addActionListener(e -> HyperlinkPanelResultatsActionPerformed(e));
-                            PanelSSO3.add(button_Copy_ClipBoard_Custom, CC.xy(17, 12));
+                            PanelSSO3.add(button_Copy_ClipBoard_Custom, CC.xy(17, 11));
 
                             //---- button_Zoom_plus_customSign ----
                             button_Zoom_plus_customSign.setText("+");
                             button_Zoom_plus_customSign.setFont(new Font("DejaVu Sans", Font.BOLD, 16));
                             button_Zoom_plus_customSign.addActionListener(e -> button_Decrypt_Custom_ActionPerformed(e));
-                            PanelSSO3.add(button_Zoom_plus_customSign, CC.xy(17, 18, CC.DEFAULT, CC.CENTER));
+                            PanelSSO3.add(button_Zoom_plus_customSign, CC.xy(17, 17, CC.DEFAULT, CC.CENTER));
 
                             //---- button_Zoom_minus_customSign ----
                             button_Zoom_minus_customSign.setText("-");
                             button_Zoom_minus_customSign.setFont(new Font("DejaVu Sans", Font.BOLD, 16));
                             button_Zoom_minus_customSign.addActionListener(e -> button_Decrypt_Custom_ActionPerformed(e));
-                            PanelSSO3.add(button_Zoom_minus_customSign, CC.xy(17, 20, CC.DEFAULT, CC.CENTER));
+                            PanelSSO3.add(button_Zoom_minus_customSign, CC.xy(17, 19, CC.DEFAULT, CC.CENTER));
                         }
                         PanelConfig.add(PanelSSO3, CC.xywh(1, 1, 16, 1));
                     }
@@ -1259,7 +1339,7 @@ public class MainFrame extends JFrame {
 
                             //---- textField_Username ----
                             textField_Username.setFont(new Font("DejaVu Sans", Font.PLAIN, 14));
-                            textField_Username.setText("rac021");
+                            textField_Username.setText("jaxy-021");
                             PanelConfig2.add(textField_Username, CC.xy(7, 9));
 
                             //---- label8 ----
@@ -1422,7 +1502,7 @@ public class MainFrame extends JFrame {
 	}
 
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-        // Generated using JFormDesigner Evaluation license - RAC YAH
+        // Generated using JFormDesigner Evaluation license - rya
         protected JMenuBar menuBar1;
         private JMenu menu1;
         private JMenuItem menuItemImportXML;
@@ -1483,6 +1563,7 @@ public class MainFrame extends JFrame {
         private JPanel panel10;
         private JLabel label34;
         private JTextField textField_Params_Custom;
+        private JButton button_Stop_Service_Custom;
         private JLabel label41;
         private JLabel label42;
         private JLabel label43;
@@ -1502,6 +1583,9 @@ public class MainFrame extends JFrame {
         private JComboBox<String> comboBox_Cipher_Custom;
         private JXHyperlink button_Decrypt_Custom;
         private JLabel label5;
+        private JPanel panel14;
+        private JCheckBox checkBoxKeepAllLines;
+        private JSpinner spinnerTotalLinesToKeep;
         private JScrollPane scrollPane5;
         private JTextArea textArea_Result_Custom;
         private JButton button_Script_CUSTOM;

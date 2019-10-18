@@ -11,4 +11,12 @@ public interface IOutputWraper       {
    
    public  String get ()             ;
    
+   public void clear()               ;
+   
+   public int getTotalLines()        ;
+   
+   public void disableSelection()    ;
+   
+   public void enableSelection()     ;
+   
 }

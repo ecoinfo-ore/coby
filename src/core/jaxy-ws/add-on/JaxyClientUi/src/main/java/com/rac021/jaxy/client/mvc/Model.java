@@ -63,7 +63,7 @@ public class Model {
     
     private static AsyncCharConsumer<HttpResponse> consumer  ;
             
-    private static int BUF_SIZE = 6000                       ;
+    private static int BUF_SIZE = 10_000                     ;
              
     static {
         
@@ -111,7 +111,7 @@ public class Model {
         httpclient.start()                            ;
     }
      
-    private static void closetHttpClient()  {
+    public static void closetHttpClient()  {
     
       if( httpclient != null )   {
           try {
@@ -205,7 +205,8 @@ public class Model {
                                                    String keycloak_client_id ,
                                                    String keycloak_secret_id ,
                                                    String keycloak_login     ,
-                                                   String keycloak_password  ) throws Exception {
+                                                   String keycloak_password  ,
+                                                   int totalLineToKeep       ) throws Exception {
        
        String token = getToken ( urlKeycloak        , 
                                  keycloak_login     ,
@@ -231,18 +232,19 @@ public class Model {
        
        request.addHeader( "Authorization",  " Bearer " + token  ) ;
        
-       invocker(out, request )                                    ;
+       invocker(out, request , totalLineToKeep)                   ;
        
        return "Done ! "                                           ;  
     }
          
-    public static void invokeService_Using_Custom ( IOutputWraper out ,
-                                                    String serviceUrl ,
-                                                    String params     ,
-                                                    String accept     , 
-                                                    String token      ,
-                                                    String keep       ,
-                                                    String cipher     ) throws Exception {
+    public static void invokeService_Using_Custom ( IOutputWraper out   ,
+                                                    String serviceUrl   ,
+                                                    String params       ,
+                                                    String accept       , 
+                                                    String token        ,
+                                                    String keep         ,
+                                                    String cipher       ,
+                                                    int totalLineToKeep ) throws Exception {
         
         Objects.requireNonNull(out)                            ;
 
@@ -254,15 +256,18 @@ public class Model {
         request.addHeader( "API-key-Token", token.trim() )     ;
         request.addHeader( "Keep", keep  )                     ;
         request.addHeader( "Cipher", cipher )                  ;
-
-        invocker(out, request )                                ;
+        
+        invocker(out, request , totalLineToKeep )              ;
     }
     
-    private static void invocker(  final IOutputWraper  out    , 
-                                   final HttpGet request ) throws Exception {
+    private static void invocker(  final IOutputWraper  out   , 
+                                   final HttpGet request      ,
+                                   final int totalLineToKeep  ) throws Exception {
         
         final CountDownLatch latch = new CountDownLatch(1) ;
 
+        out.disableSelection()                             ;
+        
         initHttpClient()                                   ;
 
         consumer = new AsyncCharConsumer<HttpResponse>(BUF_SIZE) {
@@ -279,6 +284,9 @@ public class Model {
                 out.write( new String ( buf.toString().getBytes( StandardCharsets.ISO_8859_1 ) , 
                            StandardCharsets.UTF_8                                            ) ) ;
                 buf.clear() ;
+                if( totalLineToKeep > 0 && out.getTotalLines() >= totalLineToKeep ) {
+                    out.clear() ;
+                }
             }
 
             @Override
