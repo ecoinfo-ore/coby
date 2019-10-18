@@ -14,9 +14,5 @@ public interface IOutputWraper       {
    public void clear()               ;
    
    public int getTotalLines()        ;
-   
-   public void disableSelection()    ;
-   
-   public void enableSelection()     ;
-   
+    
 }
