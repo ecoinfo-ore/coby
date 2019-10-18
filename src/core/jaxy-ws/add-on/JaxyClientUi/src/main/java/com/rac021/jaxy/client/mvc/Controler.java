@@ -37,6 +37,12 @@ public class Controler       {
         setListeners()         ;     
         
         frame.setVisible(true) ;
+         
+        frame.getComboBox_Accept_Custom()
+             .setSelectedItem("json/plain")     ;
+         
+        frame.getComboBox_Accept()
+             .setSelectedItem("json/plain")     ;
         
         JceSecurity.unlimit()  ;
     }
