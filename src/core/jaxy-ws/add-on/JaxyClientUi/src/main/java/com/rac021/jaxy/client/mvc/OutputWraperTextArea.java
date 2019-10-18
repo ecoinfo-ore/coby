@@ -38,15 +38,4 @@ public class OutputWraperTextArea implements IOutputWraper {
       return this.textArea.getLineCount() ;
     }
     
-    @Override
-    public void disableSelection()       {
-      this.textArea.setHighlighter(null) ;
-    }
-    
-    @Override
-    public void enableSelection()       {
-      this.textArea.setHighlighter(null);
-    }
-
-    
 }
