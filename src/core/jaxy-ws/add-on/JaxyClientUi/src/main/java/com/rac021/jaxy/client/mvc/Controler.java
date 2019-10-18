@@ -4,7 +4,10 @@ package com.rac021.jaxy.client.mvc ;
 import java.awt.Font ;
 import java.time.Instant ;
 import java.io.PrintWriter ;
+import javax.swing.JComboBox;
+import javax.swing.JTextArea;
 import java.io.StringWriter ;
+import java.awt.event.ItemEvent;
 import java.util.logging.Level ;
 import java.util.logging.Logger ;
 import java.awt.event.ActionEvent ;
@@ -12,8 +15,6 @@ import java.io.UnsupportedEncodingException ;
 import java.security.NoSuchAlgorithmException ;
 import com.rac021.jaxy.client.security.Digestor ;
 import com.rac021.jaxy.client.security.JceSecurity ;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
 /**
  *
@@ -30,7 +31,7 @@ public class Controler       {
     public Controler() {
     }
      
-    public Controler (MainFrame frame, Model model) {
+    public Controler ( MainFrame frame, Model model ) {
 
         this.frame = frame     ;
        
@@ -38,12 +39,12 @@ public class Controler       {
         
         frame.setVisible(true) ;
          
-        frame.getComboBox_Accept_Custom()
-             .setSelectedItem("json/plain")     ;
-         
-        frame.getComboBox_Accept()
-             .setSelectedItem("json/plain")     ;
+        disableTextAreaSelection( frame.getTextArea_Result_Custom() )    ;
+        disableTextAreaSelection( frame.getTextArea_Result_SSO() )       ;
         
+        setDefaultAcceptToJsonPlain( frame.getComboBox_Accept_Custom() ) ;
+        setDefaultAcceptToJsonPlain( frame.getComboBox_Accept() )        ;
+         
         JceSecurity.unlimit()  ;
     }
     
@@ -502,8 +503,15 @@ public class Controler       {
                this.frame.getSpinnerTotalLinesToKeep().setEnabled(false)      ;
                this.frame.getSpinnerTotalLinesToKeep().setValue(0)            ;
                
-           };
-       });
+           } ;
+       }) ;
     }
     
+    private void disableTextAreaSelection(JTextArea jTextArea ) {
+      jTextArea.setHighlighter(null) ;
+    }
+
+    private void setDefaultAcceptToJsonPlain(JComboBox<String> combo) {
+     combo.setSelectedItem("json/plain") ;
+    }
 }
