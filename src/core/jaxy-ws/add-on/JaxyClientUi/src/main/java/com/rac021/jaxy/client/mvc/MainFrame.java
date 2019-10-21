@@ -965,7 +965,7 @@ public class MainFrame extends JFrame {
 
                                 //---- textField_RUL_SERVICE_Custom ----
                                 textField_RUL_SERVICE_Custom.setFont(new Font("DejaVu Sans", Font.PLAIN, 15));
-                                textField_RUL_SERVICE_Custom.setText("http://localhost:8080/coby/rest/resources/infoServices");
+                                textField_RUL_SERVICE_Custom.setText("http://localhost:8080/rest/resources/infoServices");
                                 PanelConfig4.add(textField_RUL_SERVICE_Custom, CC.xywh(19, 5, 2, 1));
 
                                 //---- button_Run_Custom ----
