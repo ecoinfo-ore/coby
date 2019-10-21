@@ -62,7 +62,7 @@ authentication : # using HTTP
 ### SERVER ######################
 #################################
 
-HTTP_PORT  : 8181       
+HTTP_PORT  : 8080       
 HTTPS_PORT : 8443      
 
 TRANSPORT  : HTTP  # HTTPS
@@ -161,7 +161,7 @@ SelectSize         : 5000
 ### Optional
 
 ## Application Context 
-ROOT_APPLICATION_CONTEXT : coby # same as /jaxy
+# ROOT_APPLICATION_CONTEXT : coby # same as /coby
 
 # Context of the Admin Console
 ADMIN_CONSOLE_CONTEXT    : /console
