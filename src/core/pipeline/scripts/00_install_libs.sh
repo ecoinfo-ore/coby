@@ -277,7 +277,7 @@
  echo " ###########################                                                                        "
  echo " ### Install Blazegraph  ###                                                                        "
  echo
- echo -e "\e[91m Version --> 2.1.4 \e[32m                                                                  "
+ echo -e "\e[91m Version --> 2.1.5 \e[32m                                                                  "
  echo
  echo -e "\e[90m Location : $ROOT_PATH/$DIRECTORY_LIBS/$BLAZEGRAPH_LOCATION/$BLAZEGRAPH_TARGET_NAME \e[32m "
  echo
