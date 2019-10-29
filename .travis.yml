@@ -18,7 +18,7 @@ script:
   - echo $TRAVIS_REPO_SLUG
   - echo $COBY_TAG_NAME
   - COMMIT=${TRAVIS_COMMIT::8}
-  - echo " COMMIT SHA : $COMMIT "
+  - echo $COMMIT
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u $DOCKER_USERNAME --password-stdin
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ] ; then echo "travis-$TRAVIS_BRANCH-$TRAVIS_BUILD_NUMBER" ; else echo "travis-$TRAVIS_BRANCH-$TRAVIS_BUILD_NUMBER-snapshot" ; fi`
