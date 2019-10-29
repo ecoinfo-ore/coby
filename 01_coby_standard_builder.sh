@@ -67,6 +67,12 @@ fi
    
  fi
 
+ if [ "$3" = "quiet" -o "$4" = "quiet" ] ; then 
+   
+     MAVEN_COMPILE_QUIET=" quiet "
+     MAVEN_COMPILE_QUIET_CMD=" -q " 
+ fi
+
  if [ "$1" = "-i" ] && [ "$2" = "coby" -o "$3" = "coby" ] ; then 
 
    mkdir -p  $COBY_BINARY  
@@ -95,7 +101,7 @@ fi
 
    echo -e "\e[90m Run Instalation ..\e[32m "
 
-   ./$SCRIPTS_PATH_DESTINATION/00_install_libs.sh
+   ./$SCRIPTS_PATH_DESTINATION/00_install_libs.sh $MAVEN_COMPILE_QUIET
 
  fi
 
@@ -149,7 +155,7 @@ fi
    tput setaf 7
 
    cp -a $JAVA_PROJECT_JAXY_API/. $TMP_COMPILATION_FOLDER/ 
-   cd  $TMP_COMPILATION_FOLDER/ && mvn clean install && cd $CURRENT_PATH
+   cd  $TMP_COMPILATION_FOLDER/ && mvn clean install $MAVEN_COMPILE_QUIET_CMD && cd $CURRENT_PATH
    rm -rf $TMP_COMPILATION_FOLDER/{,.[!.],..?}*
    echo
 
@@ -166,7 +172,7 @@ fi
    tput setaf 7
 
    cp -a $JAVA_PROJECT_JAXY_SECURITY/. $TMP_COMPILATION_FOLDER/ 
-   cd  $TMP_COMPILATION_FOLDER/ && mvn clean install && cd $CURRENT_PATH 
+   cd  $TMP_COMPILATION_FOLDER/ && mvn clean install $MAVEN_COMPILE_QUIET_CMD && cd $CURRENT_PATH 
    rm -rf $TMP_COMPILATION_FOLDER/{,.[!.],..?}*
    echo
    
@@ -183,7 +189,7 @@ fi
    tput setaf 7
 
    cp -a $JAVA_PROJECT_JAXY_DISCOVERY/. $TMP_COMPILATION_FOLDER/ 
-   cd  $TMP_COMPILATION_FOLDER/ && mvn clean install && cd $CURRENT_PATH 
+   cd  $TMP_COMPILATION_FOLDER/ && mvn clean install $MAVEN_COMPILE_QUIET_CMD && cd $CURRENT_PATH 
    rm -rf $TMP_COMPILATION_FOLDER/{,.[!.],..?}*
    echo 
    
@@ -200,7 +206,7 @@ fi
    tput setaf 7
 
    cp -a $JAVA_PROJECT_JAXY_COBY/. $TMP_COMPILATION_FOLDER/ 
-   cd  $TMP_COMPILATION_FOLDER/ &&  mvn clean package && cd $CURRENT_PATH
+   cd  $TMP_COMPILATION_FOLDER/ &&  mvn clean package $MAVEN_COMPILE_QUIET_CMD && cd $CURRENT_PATH
 
    cp $TMP_COMPILATION_FOLDER/target/$JAXY_SERVER_NAME $JAXY_SERVER_PATH 
  
@@ -225,7 +231,7 @@ fi
    tput setaf 7
 
    cp -a $JAVA_PROJECT_JAXY_CLIENT/. $TMP_COMPILATION_FOLDER/ 
-   cd  $TMP_COMPILATION_FOLDER/  && mvn clean compile assembly:single && cd $CURRENT_PATH
+   cd  $TMP_COMPILATION_FOLDER/  && mvn clean compile assembly:single $MAVEN_COMPILE_QUIET_CMD && cd $CURRENT_PATH
    
    cp $TMP_COMPILATION_FOLDER/target/$JAXY_CLIENT_NAME $JAXY_CLIENT_PATH 
    rm -rf $TMP_COMPILATION_FOLDER/{,.[!.],..?}*
