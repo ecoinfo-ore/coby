@@ -75,7 +75,7 @@
 
  GITHUB_CORESE_PROJECT="https://github.com/ecoinfo-ore/CoreseInfer.git"
 
- GITHUB_BLZ_PROJECT="https://raw.githubusercontent.com/ecoinfo-ore/blazegraph_libs/master/blazegraph_2_1_4.jar"
+ GITHUB_BLZ_PROJECT="https://raw.githubusercontent.com/ecoinfo-ore/blazegraph_libs/master/blazegraph_2_1_5.jar"
 
  TMP="tmp_install"
  DOCS="Docs"
@@ -109,7 +109,7 @@
 
  # Do not touch the CORESE_COMPILE_NAME
  BLAZEGRAPH_LOCATION="Blazegraph"
- BLAZEGRAPH_TARGET_NAME="blazegraph_2_1_4.jar"
+ BLAZEGRAPH_TARGET_NAME="blazegraph_2_1_5.jar"
  BLAZEGRAPG_INFO_INSTALL="BLZ_INFO_INSTALL"
 
  # Each program has its own documentation located in 
