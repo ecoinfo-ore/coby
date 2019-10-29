@@ -27,6 +27,10 @@
                 ("ontop_version") ONTOP_VERSION=$VALUE               
             esac
       ;;
+      
+       quiet) MAVEN_COMPILE_QUIET=" -q "
+      ;;
+      
       help)  echo
 	     echo " Total Arguments : Two                                                                     "
              echo 
@@ -48,7 +52,9 @@
  DATA_BASE=${DATA_BASE:-postgresql}
 
  ONTOP_VERSION=` echo ${ONTOP_VERSION:-" V1 "} | xargs `
-
+ 
+ MAVEN_COMPILE_QUIET=${MAVEN_COMPILE_QUIET:-"" }
+ 
  tput setaf 2
  echo 
  echo -e " #####################################         "
@@ -169,7 +175,7 @@
 
  cd $ROOT_PATH/$DIRECTORY_LIBS/$TMP
 
- mvn clean install assembly:single 
+ mvn clean install assembly:single $MAVEN_COMPILE_QUIET
 
  echo 
 
@@ -211,10 +217,10 @@
  cd $ROOT_PATH/$DIRECTORY_LIBS/$TMP
 
  if [ "$DATA_BASE" != "" ] ; then 
-     mvn -P $DATA_BASE clean install assembly:single
+     mvn -P $DATA_BASE clean install assembly:single $MAVEN_COMPILE_QUIET
  else 
      # Postresql as default database
-     mvn clean install assembly:single
+     mvn clean install assembly:single $MAVEN_COMPILE_QUIET
  fi
 
  echo
@@ -248,7 +254,7 @@
 
  cd $ROOT_PATH/$DIRECTORY_LIBS/$TMP
 
- mvn clean install assembly:single
+ mvn clean install assembly:single $MAVEN_COMPILE_QUIET
 
  echo
 
