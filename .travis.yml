@@ -27,4 +27,3 @@ after_success:
   - docker push $DOCKER_USERNAME/$COBY_TAG_NAME:$TAG
   - docker tag $COBY_TAG_NAME $DOCKER_USERNAME/$COBY_TAG_NAME:latest
   - docker push $DOCKER_USERNAME/$COBY_TAG_NAME:latest
-    
