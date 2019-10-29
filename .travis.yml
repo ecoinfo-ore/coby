@@ -21,7 +21,7 @@ script:
   - echo $COMMIT
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u $DOCKER_USERNAME --password-stdin
-  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ] ; then echo "travis-$TRAVIS_BRANCH-$TRAVIS_BUILD_NUMBER" ; else echo "travis-$TRAVIS_BRANCH-$TRAVIS_BUILD_NUMBER-snapshot" ; fi`
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ] ; then echo "travis-$TRAVIS_BRANCH-$COMMIT" ; else echo "travis-$TRAVIS_BRANCH-$COMMIT" ; fi`
   - docker build -t $COBY_TAG_NAME . 
   - docker tag $COBY_TAG_NAME $DOCKER_USERNAME/$COBY_TAG_NAME:$TAG
   - docker push $DOCKER_USERNAME/$COBY_TAG_NAME:$TAG
